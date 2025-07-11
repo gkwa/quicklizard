@@ -138,7 +138,7 @@ def ringgem_setup():
 
     logging.info("Setup complete")
     logging.info(f"Ringgem installed in: {ringgem_dir}")
-    logging.info(f"To use tasks, run: task --dir={ringgem_master_dir} <task-name>")
+    logging.info(f"To list tasks, run: task --dir={ringgem_master_dir} --list-all")
 
 
 def main() -> None:
