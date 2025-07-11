@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Ringgem setup script - Python replacement for shell commands
 Requires Python 3.12+ (uses urllib.request instead of requests)
@@ -79,7 +78,7 @@ def download_and_execute_script(url, script_name):
         sys.exit(1)
 
 
-def main():
+def ringgem_setup():
     """Main setup function."""
     logging.info("Starting Ringgem setup")
 
@@ -142,7 +141,8 @@ def main():
     logging.info(f"To use tasks, run: task --dir={ringgem_master_dir} <task-name>")
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Main entry point for the quicklizard command."""
     parser = argparse.ArgumentParser(description="Ringgem setup script")
     parser.add_argument(
         "-v",
@@ -161,7 +161,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     try:
-        main()
+        ringgem_setup()
     except KeyboardInterrupt:
         logging.warning("Setup interrupted by user")
         sys.exit(1)

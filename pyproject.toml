@@ -1,7 +1,7 @@
 [project]
 name = "quicklizard"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ringgem setup script"
 readme = "README.md"
 authors = [
     { name = "Taylor Monacelli", email = "taylormonacelli@gmail.com" }
