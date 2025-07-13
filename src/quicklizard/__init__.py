@@ -46,6 +46,15 @@ def run_command(cmd, cwd=None, check=True):
         return e
 
 
+def output_command(cmd, cwd=None, verbosity=0):
+    """Output what command would be run instead of running it."""
+    if verbosity > 0:
+        if cwd:
+            print(f"cd {cwd} && {cmd}")
+        else:
+            print(cmd)
+
+
 def download_file(url, destination):
     """Download a file from URL to destination."""
     try:
@@ -78,7 +87,7 @@ def download_and_execute_script(url, script_name):
         sys.exit(1)
 
 
-def ringgem_setup():
+def ringgem_setup(verbosity=0):
     """Main setup function."""
     logging.info("Starting Ringgem setup")
 
@@ -128,13 +137,16 @@ def ringgem_setup():
         zip_ref.extractall(ringgem_dir)
 
     # Step 7: List available tasks
-    logging.info("Listing available tasks")
+    logging.info("Would list available tasks")
     ringgem_master_dir = ringgem_dir / "ringgem-master"
-    run_command(f"task --dir={ringgem_master_dir} --list-all")
+    output_command(f"task --dir={ringgem_master_dir} --list-all", verbosity=verbosity)
 
     # Step 8: Install testscript
-    logging.info("Installing testscript")
-    run_command(f"task --dir={ringgem_master_dir} install-testscript-on-linux")
+    logging.info("Would install testscript")
+    output_command(
+        f"task --dir={ringgem_master_dir} install-testscript-on-linux",
+        verbosity=verbosity,
+    )
 
     logging.info("Setup complete")
     logging.info(f"Ringgem installed in: {ringgem_dir}")
@@ -161,7 +173,7 @@ def main() -> None:
         sys.exit(1)
 
     try:
-        ringgem_setup()
+        ringgem_setup(args.verbose)
     except KeyboardInterrupt:
         logging.warning("Setup interrupted by user")
         sys.exit(1)
